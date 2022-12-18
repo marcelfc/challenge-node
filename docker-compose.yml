@@ -1,0 +1,25 @@
+version: '3'
+
+services: 
+  app:
+    build: 
+      context: ./node
+    image: marcelfc25/node-app:latest
+    container_name: app
+    networks: 
+      - nodeappnet
+
+  nginx:
+    build: 
+      context: ./nginx
+      dockerfile: Dockerfile
+    image: marcelfc25/nginx:latest
+    container_name: nginx
+    networks: 
+      - nodeappnet
+    ports: 
+      - "8080:80"
+
+networks: 
+  nodeappnet:
+    driver: bridge      
